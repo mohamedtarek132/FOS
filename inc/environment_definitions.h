@@ -85,6 +85,8 @@ LIST_HEAD(WS_List, WorkingSetElement);		// Declares 'struct WS_list'
 // at the "Switch stacks" comment. Switch doesn't save eip explicitly,
 // but it is on the stack and initialize_environment() manipulates it.
 struct Context {
+//(Destination Index): Called the destination index, it’s used to point
+//to the destination in memory, often for string operations.
   uint32 edi;
   uint32 esi;
   uint32 edx;
