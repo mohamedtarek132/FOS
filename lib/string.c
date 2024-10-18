@@ -319,20 +319,3 @@ char* str2lower(char *dst, const char *src)
 	panic("str2lower is not implemented yet!");
 	return NULL;
 }
-
-bool substr_is_matched(char* substr,char* str)
-{
-	int substr_length = strlen(substr);
-	char* ptr;
-
-	for(int i = 0;i < substr_length;i++)
-	{
-		ptr = strfind(str,substr[i]);
-		if((*ptr) == '\0')
-		{
-			return 0;
-		}
-	}
-
-	return 1;
-}

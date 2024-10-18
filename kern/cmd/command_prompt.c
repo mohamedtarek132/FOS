@@ -452,10 +452,13 @@ int execute_command(char *command_string)
 	return 0;
 }
 
-
 int process_command(int number_of_arguments, char** arguments)
 {
 	//TODO: [PROJECT'24.MS1 - #01] [1] PLAY WITH CODE! - process_command
+
+	int substr_length;
+	char* strfind_ptr;
+	bool substr_matched_flag;
 
 	LIST_INIT(&foundCommands);
 
@@ -482,12 +485,27 @@ int process_command(int number_of_arguments, char** arguments)
 		}
 		else
 		{
-			if(substr_is_matched(arguments[0], commands[i].name))
+			substr_length = strlen(arguments[0]);
+			substr_matched_flag = 1;
+
+			for(int j = 0;j < substr_length;j++)
+				{
+					strfind_ptr = strfind(commands[i].name,arguments[0][j]);
+
+					if((*strfind_ptr) == '\0')
+					{
+						substr_matched_flag = 0;
+						break;
+					}
+				}
+
+			if(substr_matched_flag)
 			{
 				LIST_INSERT_TAIL(&foundCommands,&commands[i]);
 			}
 		}
 	}
+
 	if(LIST_SIZE(&(foundCommands)) == 0)
 	{
 		return CMD_INVALID;
