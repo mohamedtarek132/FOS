@@ -457,12 +457,44 @@ int process_command(int number_of_arguments, char** arguments)
 {
 	//TODO: [PROJECT'24.MS1 - #01] [1] PLAY WITH CODE! - process_command
 
+	LIST_INIT(&foundCommands);
+
 	for (int i = 0; i < NUM_OF_COMMANDS; i++)
 	{
 		if (strcmp(arguments[0], commands[i].name) == 0)
 		{
-			return i;
+			if(commands[i].num_of_args == number_of_arguments - 1)
+			{
+				LIST_INIT(&foundCommands);
+				return i;
+			}
+			else if(commands[i].num_of_args == -1 && number_of_arguments > 1)
+			{
+				LIST_INIT(&foundCommands);
+				return i;
+			}
+			else
+			{
+				LIST_INIT(&foundCommands);
+				LIST_INSERT_TAIL(&foundCommands,&commands[i]);
+				return CMD_INV_NUM_ARGS;
+			}
+		}
+		else
+		{
+			if(substr_is_matched(arguments[0], commands[i].name))
+			{
+				LIST_INSERT_TAIL(&foundCommands,&commands[i]);
+			}
 		}
 	}
-	return CMD_INVALID;
+	if(LIST_SIZE(&(foundCommands)) == 0)
+	{
+		return CMD_INVALID;
+
+	}
+	else
+	{
+		return CMD_MATCHED;
+	}
 }

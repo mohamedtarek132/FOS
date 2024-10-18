@@ -30,4 +30,6 @@ int strsplit(char *string, char *SPLIT_CHARS, char **argv, int * argc);
 /*2024*/
 char* str2lower(char *dst, const char *src);
 
+bool substr_is_matched(char* substr,char* str);
+
 #endif /* not FOS_INC_STRING_H */
