@@ -74,7 +74,7 @@ void test_initialize_dynamic_allocator()
 
 
 	//Check#1: Metadata
-	uint32* daBeg = (uint32*) KERNEL_HEAP_START ;
+	uint32* daBeg = (uint32*) KERNEL_HEAP_START;
 	uint32* daEnd = (uint32*) (KERNEL_HEAP_START +  initAllocatedSpace - sizeof(int));
 	uint32* blkHeader = (uint32*) (KERNEL_HEAP_START + sizeof(int));
 	uint32* blkFooter = (uint32*) (KERNEL_HEAP_START +  initAllocatedSpace - 2*sizeof(int));

@@ -103,9 +103,20 @@ void initialize_dynamic_allocator(uint32 daStart, uint32 initSizeOfAllocatedSpac
 
 	//TODO: [PROJECT'24.MS1 - #04] [3] DYNAMIC ALLOCATOR - initialize_dynamic_allocator
 	//COMMENT THE FOLLOWING LINE BEFORE START CODING
-	panic("initialize_dynamic_allocator is not implemented yet");
+	//panic("initialize_dynamic_allocator is not implemented yet");
 	//Your Code is Here...
 
+	uint32* BEG_Block = (uint32 *)daStart;
+	*BEG_Block = 1;
+
+	struct BlockElement* block = (struct BlockElement *)(daStart + (2*sizeof(int)));
+
+	set_block_data((void*)block, initSizeOfAllocatedSpace - 8, 0);
+
+	uint32* END_Block = (uint32 *)(daStart + initSizeOfAllocatedSpace - sizeof(int));
+	*END_Block = 1;
+
+	LIST_INSERT_TAIL(&freeBlocksList, block);
 }
 //==================================
 // [2] SET BLOCK HEADER & FOOTER:
@@ -128,6 +139,7 @@ void set_block_data(void* va, uint32 totalSize, bool isAllocated)
 	uint_va = (uint32*)tail_address;
 
 	*uint_va = totalSize | (uint32)isAllocated;
+
 }
 
 
