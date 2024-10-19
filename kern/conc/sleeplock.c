@@ -43,7 +43,6 @@ void acquire_sleeplock(struct sleeplock *lk)
 
 	while(lk->locked == 1)
 	{
-		LIST_INSERT_TAIL(&(lk->chan.queue), get_cpu_proc()) ;
 		sleep(&(lk->chan), &(lk->lk));
 	}
 
