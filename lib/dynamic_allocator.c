@@ -119,11 +119,13 @@ void set_block_data(void* va, uint32 totalSize, bool isAllocated)
 
 	uint32* uint_va = (uint32*)va;
 	uint_va--;
+	uint32 tail_address;
 
 	*uint_va = totalSize | (uint32)isAllocated;
 
-	va = va - 4 + (void*)totalSize - 4;
-	uint_va = (uint32*)va;
+
+	tail_address = (uint32)va - 4 + totalSize -4;
+	uint_va = (uint32*)tail_address;
 
 	*uint_va = totalSize | (uint32)isAllocated;
 }
