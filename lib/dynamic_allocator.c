@@ -114,8 +114,18 @@ void set_block_data(void* va, uint32 totalSize, bool isAllocated)
 {
 	//TODO: [PROJECT'24.MS1 - #05] [3] DYNAMIC ALLOCATOR - set_block_data
 	//COMMENT THE FOLLOWING LINE BEFORE START CODING
-	panic("set_block_data is not implemented yet");
+	//panic("set_block_data is not implemented yet");
 	//Your Code is Here...
+
+	uint32* uint_va = (uint32*)va;
+	uint_va--;
+
+	*uint_va = totalSize | (uint32)isAllocated;
+
+	va = va - 4 + (void*)totalSize - 4;
+	uint_va = (uint32*)va;
+
+	*uint_va = totalSize | (uint32)isAllocated;
 }
 
 
