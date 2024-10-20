@@ -315,12 +315,11 @@ void sys_free_user_mem(uint32 virtual_address, uint32 size)
 void sys_allocate_user_mem(uint32 virtual_address, uint32 size)
 {
 	//TODO: [PROJECT'24.MS1 - #03] [2] SYSTEM CALLS - Params Validation
-	uint32 * ptr = &virtual_address;
-	if (ptr == NULL)
+	if (virtual_address == 0)
 	{
 		env_exit();
 	}
-	if (*ptr < USER_HEAP_START || *(ptr + size) > USER_HEAP_MAX)
+	if (virtual_address < USER_HEAP_START || (virtual_address + size) > USER_HEAP_MAX)
 	{
 		env_exit();
 	}
@@ -331,12 +330,11 @@ void sys_allocate_user_mem(uint32 virtual_address, uint32 size)
 void sys_allocate_chunk(uint32 virtual_address, uint32 size, uint32 perms)
 {
 	//TODO: [PROJECT'24.MS1 - #03] [2] SYSTEM CALLS - Params Validation
-	uint32 * ptr = &virtual_address;
-	if (ptr == NULL)
+	if (virtual_address == 0)
 	{
 		env_exit();
 	}
-	if (*ptr < USER_HEAP_START || *(ptr + size) > USER_HEAP_MAX)
+	if (virtual_address < USER_HEAP_START || (virtual_address + size) > USER_HEAP_MAX)
 	{
 		env_exit();
 	}
