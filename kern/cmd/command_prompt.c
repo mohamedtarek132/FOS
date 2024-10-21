@@ -479,7 +479,7 @@ int process_command(int number_of_arguments, char** arguments)
 			else
 			{
 				LIST_INIT(&foundCommands);
-				LIST_INSERT_TAIL(&foundCommands,&commands[i]);
+				LIST_INSERT_HEAD(&foundCommands,&commands[i]);
 				return CMD_INV_NUM_ARGS;
 			}
 		}
@@ -488,20 +488,24 @@ int process_command(int number_of_arguments, char** arguments)
 			substr_length = strlen(arguments[0]);
 			substr_matched_flag = 1;
 
+			strfind_ptr = commands[i].name;
+
 			for(int j = 0;j < substr_length;j++)
 				{
-					strfind_ptr = strfind(commands[i].name,arguments[0][j]);
+					strfind_ptr = strfind(strfind_ptr,arguments[0][j]);
 
 					if((*strfind_ptr) == '\0')
 					{
 						substr_matched_flag = 0;
 						break;
 					}
+
+					strfind_ptr++;
 				}
 
 			if(substr_matched_flag)
 			{
-				LIST_INSERT_TAIL(&foundCommands,&commands[i]);
+				LIST_INSERT_HEAD(&foundCommands,&commands[i]);
 			}
 		}
 	}
